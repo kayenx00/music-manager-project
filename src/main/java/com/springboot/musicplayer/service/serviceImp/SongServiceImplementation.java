@@ -46,7 +46,6 @@ public class SongServiceImplementation implements SongService {
     public List<SongDto> findAllDto(Boolean shuffle) {
         Query query = new Query();
         query.with(Sort.by(Sort.Direction.ASC, "updateAt"));
-
         List<Song> songs = mongoTemplate.find(query, Song.class, "song");
         List<SongDto> songsDto = new ArrayList<>();
         for (Song s : songs) {
@@ -54,9 +53,9 @@ public class SongServiceImplementation implements SongService {
             songDto.clone(s);
             Optional<Genre> genre = genreServiceImplementation.getById(s.getGenre());
             Optional<Author> author = authorServiceImplementation.getById(s.getAuthor());
-            genre.ifPresent(songDto :: setGenre);
-            author.ifPresent(songDto :: setAuthor);
-
+            genre.ifPresent(songDto::setGenre);
+            author.ifPresent(songDto::setAuthor);
+            songsDto.add(songDto);
         }
         if(shuffle){
             Collections.shuffle(songsDto);

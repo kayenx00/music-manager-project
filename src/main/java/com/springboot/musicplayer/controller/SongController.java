@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/music")
+@RequestMapping(path = "/music")
 public class SongController {
     @Autowired
     private SongServiceImplementation service;
@@ -41,6 +41,14 @@ public class SongController {
                 new ResponseObject("ok", "Success", service.findAllDto(shuffle))
         );
     }
+//    @GetMapping(path = "/all")
+//    ResponseEntity<ResponseObject> getAll(@RequestParam(required = false, value = "shuffle") Boolean shuffle) {
+//        logger.info("Getting song list:... with shuffle = "+ shuffle);
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(
+//                new ResponseObject("ok", "Success", service.findAllDto(shuffle))
+//        );
+//    }
 
     @GetMapping(path = "/count")
     ResponseEntity<ResponseObject> count(

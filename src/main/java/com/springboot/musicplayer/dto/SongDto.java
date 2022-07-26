@@ -97,6 +97,7 @@ public class SongDto {
         this.id = s.getId();
         this.name = s.getName();
         this.src = s.getSrc();
+        this.thumbnail = s.getThumbnail();
         this.updateAt = s.getUpdateAt();
         this.streams = s.getStreams();
     }

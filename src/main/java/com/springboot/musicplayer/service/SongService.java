@@ -14,6 +14,7 @@ import java.util.List;
 public interface SongService {
     List<SongDto> findAllDto(Boolean shuffle);
 
+
     List<Song> findAll();
 
     long count(String name, String author, String genre);
