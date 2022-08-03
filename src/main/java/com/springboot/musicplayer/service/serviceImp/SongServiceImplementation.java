@@ -11,6 +11,7 @@ import com.springboot.musicplayer.repository.SongRepository;
 import com.springboot.musicplayer.service.SongService;
 import com.springboot.musicplayer.utils.SongSourceUpload;
 import com.springboot.musicplayer.utils.SongThumbnailUpload;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
 import java.io.IOException;
 import java.util.*;
+
 
 @Service
 public class SongServiceImplementation implements SongService {
@@ -105,6 +106,42 @@ public class SongServiceImplementation implements SongService {
             return null;
         }
     }
+    @Override
+    public List<SongDto> findByName(String name) {
+        List<Song> songs = songRepository.findAll();
+        List<SongDto> songDtos = new ArrayList<SongDto>();
+//        SongDto songDto = new SongDto();
+        for (Song s : songs){
+            if(StringUtils.containsAnyIgnoreCase(s.getName(),name)){
+                SongDto songDto = new SongDto();
+                songDto.clone(s);
+                Optional<Genre> genre = genreServiceImplementation.getById(s.getGenre());
+                Optional<Author> author = authorServiceImplementation.getById(s.getAuthor());
+                genre.ifPresent(songDto::setGenre);
+                author.ifPresent(songDto::setAuthor);
+                songDtos.add(songDto);
+            }
+
+        }
+        if(songDtos.size() == 0){
+            return null;
+        }
+        return songDtos;
+    }
+//        if (song.isPresent()) {
+//            songDto.clone(song.get());
+//
+//            Optional<Genre> genre = genreServiceImplementation.getById(song.get().getGenre());
+//            Optional<Author> author = authorServiceImplementation.getById(song.get().getAuthor());
+//
+//            genre.ifPresent(songDto::setGenre);
+//            author.ifPresent(songDto::setAuthor);
+//
+//            return songDto;
+//        } else {
+//            return null;
+//        }
+
 
     @Override
     public Boolean checkSong(Song song) {

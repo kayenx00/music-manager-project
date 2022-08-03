@@ -82,6 +82,21 @@ public class SongController {
         }
     }
 
+    @GetMapping(path = "/getName")
+    ResponseEntity<ResponseObject> getByName(@RequestParam("name") String name) {
+        List<SongDto> song = service.findByName(name);
+
+        if (song != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new ResponseObject("ok", "Success", song)
+            );
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new ResponseObject("Fail", "Not Found", song)
+            );
+        }
+    }
+
     @GetMapping(path = "/page")
     ResponseEntity<ResponseObject> getSongPage(
             @RequestParam(required = false, value = "name") String name,

@@ -20,7 +20,7 @@ public interface SongService {
     long count(String name, String author, String genre);
 
     SongDto findById(String id);
-
+    List<SongDto> findByName(String name);
     Boolean checkSong(Song song);
 
     String save(Song song);
