@@ -25,8 +25,8 @@ public class Song {
     public void clone(SongDto songDto) {
         this.id = songDto.getId();
         this.name = songDto.getName();
-        this.author = songDto.getAuthor().getId();
-        this.genre = songDto.getGenre().getId();
+        this.author = songDto.getAuthor();
+        this.genre = songDto.getGenre();
         this.src = songDto.getSrc();
         this.thumbnail = songDto.getThumbnail();
         this.updateAt = songDto.getUpdateAt();

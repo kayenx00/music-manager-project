@@ -22,9 +22,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
 import java.io.IOException;
 import java.util.*;
-
 
 @Service
 public class SongServiceImplementation implements SongService {
@@ -47,15 +47,16 @@ public class SongServiceImplementation implements SongService {
     public List<SongDto> findAllDto(Boolean shuffle) {
         Query query = new Query();
         query.with(Sort.by(Sort.Direction.ASC, "updateAt"));
+
         List<Song> songs = mongoTemplate.find(query, Song.class, "song");
         List<SongDto> songsDto = new ArrayList<>();
         for (Song s : songs) {
             SongDto songDto = new SongDto();
             songDto.clone(s);
-            Optional<Genre> genre = genreServiceImplementation.getById(s.getGenre());
-            Optional<Author> author = authorServiceImplementation.getById(s.getAuthor());
-            genre.ifPresent(songDto::setGenre);
-            author.ifPresent(songDto::setAuthor);
+//            Optional<Genre> genre = genreServiceImplementation.getById(s.getGenre());
+//            Optional<Author> author = authorServiceImplementation.getById(s.getAuthor());
+//            genre.ifPresent(songDto :: setGenre);
+//            author.ifPresent(songDto :: setAuthor);
             songsDto.add(songDto);
         }
         if(shuffle){
@@ -95,53 +96,17 @@ public class SongServiceImplementation implements SongService {
         if (song.isPresent()) {
             songDto.clone(song.get());
 
-            Optional<Genre> genre = genreServiceImplementation.getById(song.get().getGenre());
-            Optional<Author> author = authorServiceImplementation.getById(song.get().getAuthor());
-
-            genre.ifPresent(songDto::setGenre);
-            author.ifPresent(songDto::setAuthor);
+//            Optional<Genre> genre = genreServiceImplementation.getById(song.get().getGenre());
+//            Optional<Author> author = authorServiceImplementation.getById(song.get().getAuthor());
+//
+//            genre.ifPresent(songDto::setGenre);
+//            author.ifPresent(songDto::setAuthor);
 
             return songDto;
         } else {
             return null;
         }
     }
-    @Override
-    public List<SongDto> findByName(String name) {
-        List<Song> songs = songRepository.findAll();
-        List<SongDto> songDtos = new ArrayList<SongDto>();
-//        SongDto songDto = new SongDto();
-        for (Song s : songs){
-            if(StringUtils.containsAnyIgnoreCase(s.getName(),name)){
-                SongDto songDto = new SongDto();
-                songDto.clone(s);
-                Optional<Genre> genre = genreServiceImplementation.getById(s.getGenre());
-                Optional<Author> author = authorServiceImplementation.getById(s.getAuthor());
-                genre.ifPresent(songDto::setGenre);
-                author.ifPresent(songDto::setAuthor);
-                songDtos.add(songDto);
-            }
-
-        }
-        if(songDtos.size() == 0){
-            return null;
-        }
-        return songDtos;
-    }
-//        if (song.isPresent()) {
-//            songDto.clone(song.get());
-//
-//            Optional<Genre> genre = genreServiceImplementation.getById(song.get().getGenre());
-//            Optional<Author> author = authorServiceImplementation.getById(song.get().getAuthor());
-//
-//            genre.ifPresent(songDto::setGenre);
-//            author.ifPresent(songDto::setAuthor);
-//
-//            return songDto;
-//        } else {
-//            return null;
-//        }
-
 
     @Override
     public Boolean checkSong(Song song) {
@@ -163,7 +128,28 @@ public class SongServiceImplementation implements SongService {
         }
         return true;
     }
+    @Override
+    public List<SongDto> findByName(String name) {
+        List<Song> songs = songRepository.findAll();
+        List<SongDto> songDtos = new ArrayList<SongDto>();
+//        SongDto songDto = new SongDto();
+        for (Song s : songs){
+            if(StringUtils.containsAnyIgnoreCase(s.getName(),name)){
+                SongDto songDto = new SongDto();
+                songDto.clone(s);
+//                Optional<Genre> genre = genreServiceImplementation.getById(s.getGenre());
+//                Optional<Author> author = authorServiceImplementation.getById(s.getAuthor());
+//                genre.ifPresent(songDto::setGenre);
+//                author.ifPresent(songDto::setAuthor);
+                songDtos.add(songDto);
+            }
 
+        }
+        if(songDtos.size() == 0){
+            return null;
+        }
+        return songDtos;
+    }
     @Override
     public String save(Song song) {
         songRepository.save(song);
@@ -199,11 +185,11 @@ public class SongServiceImplementation implements SongService {
             SongDto songDto = new SongDto();
             songDto.clone(s);
 
-            Optional<Genre> g = genreServiceImplementation.getById(s.getGenre());
-            Optional<Author> a = authorServiceImplementation.getById(s.getAuthor());
-
-            g.ifPresent(songDto::setGenre);
-            a.ifPresent(songDto::setAuthor);
+//            Optional<Genre> g = genreServiceImplementation.getById(s.getGenre());
+//            Optional<Author> a = authorServiceImplementation.getById(s.getAuthor());
+//
+//            g.ifPresent(songDto::setGenre);
+//            a.ifPresent(songDto::setAuthor);
 
             songsDto.add(songDto);
         }
@@ -271,11 +257,11 @@ public class SongServiceImplementation implements SongService {
 
         if (nextSongs.size() > 0) {
             songDtoNext.clone(nextSongs.get(0));
-            Optional<Genre> genre = genreServiceImplementation.getById(nextSongs.get(0).getGenre());
-            Optional<Author> author = authorServiceImplementation.getById(nextSongs.get(0).getAuthor());
-
-            genre.ifPresent(songDtoNext::setGenre);
-            author.ifPresent(songDtoNext::setAuthor);
+//            Optional<Genre> genre = genreServiceImplementation.getById(nextSongs.get(0).getGenre());
+//            Optional<Author> author = authorServiceImplementation.getById(nextSongs.get(0).getAuthor());
+//
+//            genre.ifPresent(songDtoNext::setGenre);
+//            author.ifPresent(songDtoNext::setAuthor);
             related.add(songDtoNext);
 
             logger.info("List updated next 1: " + songDtoNext);
@@ -285,10 +271,10 @@ public class SongServiceImplementation implements SongService {
             Song s = mongoTemplate.find(queryNext, Song.class, "song").get(0);
             songDtoNext.clone(s);
 
-            Optional<Genre> genre = genreServiceImplementation.getById(s.getGenre());
-            Optional<Author> author = authorServiceImplementation.getById(s.getAuthor());
-            genre.ifPresent(songDtoNext::setGenre);
-            author.ifPresent(songDtoNext::setAuthor);
+//            Optional<Genre> genre = genreServiceImplementation.getById(s.getGenre());
+//            Optional<Author> author = authorServiceImplementation.getById(s.getAuthor());
+//            genre.ifPresent(songDtoNext::setGenre);
+//            author.ifPresent(songDtoNext::setAuthor);
 
             related.add(songDtoNext);
 
@@ -308,11 +294,11 @@ public class SongServiceImplementation implements SongService {
 
         if (previousSongs.size() > 0) {
             songDtoPrevious.clone(previousSongs.get(0));
-            Optional<Genre> genre = genreServiceImplementation.getById(previousSongs.get(0).getGenre());
-            Optional<Author> author = authorServiceImplementation.getById(previousSongs.get(0).getAuthor());
-
-            genre.ifPresent(songDtoPrevious::setGenre);
-            author.ifPresent(songDtoPrevious::setAuthor);
+//            Optional<Genre> genre = genreServiceImplementation.getById(previousSongs.get(0).getGenre());
+//            Optional<Author> author = authorServiceImplementation.getById(previousSongs.get(0).getAuthor());
+//
+//            genre.ifPresent(songDtoPrevious::setGenre);
+//            author.ifPresent(songDtoPrevious::setAuthor);
 
             related.add(songDtoPrevious);
             logger.info("List updated previous 1: " + songDtoPrevious);
@@ -323,10 +309,10 @@ public class SongServiceImplementation implements SongService {
             Song s = mongoTemplate.find(queryPrevious, Song.class, "song").get(0);
             songDtoPrevious.clone(s);
 
-            Optional<Genre> genre = genreServiceImplementation.getById(s.getGenre());
-            Optional<Author> author = authorServiceImplementation.getById(s.getAuthor());
-            genre.ifPresent(songDtoPrevious::setGenre);
-            author.ifPresent(songDtoPrevious::setAuthor);
+//            Optional<Genre> genre = genreServiceImplementation.getById(s.getGenre());
+//            Optional<Author> author = authorServiceImplementation.getById(s.getAuthor());
+//            genre.ifPresent(songDtoPrevious::setGenre);
+//            author.ifPresent(songDtoPrevious::setAuthor);
 
             related.add(songDtoPrevious);
 

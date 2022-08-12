@@ -47,9 +47,13 @@ public class MusicPlayerApplication {
 		return MongoClients.create(mongoClientSettings);
 	}
 
-	@Bean
-	public MongoTemplate mongoTemplate() {
-		return new MongoTemplate(mongodb(), "springify");
-	}
+//	@Bean
+//	public MongoTemplate mongoTemplate() {
+//		return new MongoTemplate(mongodb(), "springify");
+//	}
+@Bean
+public MongoTemplate mongoTemplate() {
+	return new MongoTemplate(mongodb(), "MusicPlayer");
+}
 }
 

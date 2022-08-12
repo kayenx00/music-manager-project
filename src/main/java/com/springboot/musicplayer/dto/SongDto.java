@@ -9,8 +9,10 @@ import java.util.Date;
 public class SongDto {
     private String id;
     private String name;
-    private Author author;
-    private Genre genre;
+    private String author;
+    private String genre;
+//    private Author author;
+//    private Genre genre;
     private String src;
     private String thumbnail;
     private Date updateAt;
@@ -32,19 +34,35 @@ public class SongDto {
         this.name = name;
     }
 
-    public Author getAuthor() {
+//    public Author getAuthor() {
+//        return author;
+//    }
+//
+//    public void setAuthor(Author author) {
+//        this.author = author;
+//    }
+//
+//    public Genre getGenre() {
+//        return genre;
+//    }
+//
+//    public void setGenre(Genre genre) {
+//        this.genre = genre;
+//    }
+
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
-    public Genre getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
@@ -83,7 +101,7 @@ public class SongDto {
     public SongDto() {
     }
 
-    public SongDto(String id, String name, Author author, Genre genre, String src, String thumbnail, Date updateAt, Long streams) {
+    public SongDto(String id, String name, String author, String genre, String src, String thumbnail, Date updateAt, Long streams) {
         this.id = id;
         this.name = name;
         this.author = author;
@@ -96,6 +114,8 @@ public class SongDto {
     public void clone(Song s){
         this.id = s.getId();
         this.name = s.getName();
+        this.author = s.getAuthor();
+        this.genre = s.getGenre();
         this.src = s.getSrc();
         this.thumbnail = s.getThumbnail();
         this.updateAt = s.getUpdateAt();

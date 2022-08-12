@@ -66,9 +66,8 @@ public class SongController {
 
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("OK", "Success", service.count(name, author, genre))
-        );
-    }
-
+        );}
+    
     @GetMapping(path = "/get")
     ResponseEntity<ResponseObject> getById(@RequestParam("id") String id) {
         SongDto song = service.findById(id);
@@ -163,7 +162,7 @@ public class SongController {
 
     @DeleteMapping(value = "/delete")
     ResponseEntity<ResponseObject> deleteSong(@RequestParam(name = "id") List<String> list) {
-        if (list.size() > 0) {
+        if (list.size() >= 0) {
             Song song = new Song();
             for (String s : list) {
                 song.setId(s);
