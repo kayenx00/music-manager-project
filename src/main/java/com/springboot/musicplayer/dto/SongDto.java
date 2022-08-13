@@ -1,7 +1,4 @@
 package com.springboot.musicplayer.dto;
-
-import com.springboot.musicplayer.model.Author;
-import com.springboot.musicplayer.model.Genre;
 import com.springboot.musicplayer.model.Song;
 
 import java.util.Date;
@@ -11,8 +8,6 @@ public class SongDto {
     private String name;
     private String author;
     private String genre;
-//    private Author author;
-//    private Genre genre;
     private String src;
     private String thumbnail;
     private Date updateAt;
@@ -34,21 +29,6 @@ public class SongDto {
         this.name = name;
     }
 
-//    public Author getAuthor() {
-//        return author;
-//    }
-//
-//    public void setAuthor(Author author) {
-//        this.author = author;
-//    }
-//
-//    public Genre getGenre() {
-//        return genre;
-//    }
-//
-//    public void setGenre(Genre genre) {
-//        this.genre = genre;
-//    }
 
     public String getAuthor() {
         return author;

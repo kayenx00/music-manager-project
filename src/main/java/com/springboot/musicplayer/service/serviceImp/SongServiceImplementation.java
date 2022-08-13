@@ -3,8 +3,6 @@ package com.springboot.musicplayer.service.serviceImp;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.springboot.musicplayer.dto.SongDto;
-import com.springboot.musicplayer.model.Author;
-import com.springboot.musicplayer.model.Genre;
 import com.springboot.musicplayer.model.Song;
 import com.springboot.musicplayer.model.SongPage;
 import com.springboot.musicplayer.repository.SongRepository;
@@ -32,14 +30,19 @@ public class SongServiceImplementation implements SongService {
     private SongRepository songRepository;
     @Autowired
     private MongoTemplate mongoTemplate;
-    @Autowired
-    private GenreServiceImplementation genreServiceImplementation;
-    @Autowired
-    private AuthorServiceImplementation authorServiceImplementation;
+//    @Autowired
+//    private GenreServiceImplementation genreServiceImplementation;
+//    @Autowired
+//    private AuthorServiceImplementation authorServiceImplementation;
+//    private final Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+//            "cloud_name", "dungtd",
+//            "api_key", "553685374214836",
+//            "api_secret", "QLOlTiPPPESG9iyQhzG634GfhBQ"));
+
     private final Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-            "cloud_name", "dungtd",
-            "api_key", "553685374214836",
-            "api_secret", "QLOlTiPPPESG9iyQhzG634GfhBQ"));
+            "cloud_name", "dpbgdohpr",
+            "api_key", "891485522447233",
+            "api_secret", "Owvf0vHIlnXPmIu5ntDdRbEzYmw"));
 
     private static final Logger logger = LoggerFactory.getLogger(SongServiceImplementation.class);
 

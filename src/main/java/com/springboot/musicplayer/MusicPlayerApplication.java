@@ -18,10 +18,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableMongoRepositories
 public class MusicPlayerApplication {
 
+//	Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+//			"cloud_name", "dungtd",
+//			"api_key", "553685374214836",
+//			"api_secret", "QLOlTiPPPESG9iyQhzG634GfhBQ"));
+
 	Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-			"cloud_name", "dungtd",
-			"api_key", "553685374214836",
-			"api_secret", "QLOlTiPPPESG9iyQhzG634GfhBQ"));
+			"cloud_name", "dpbgdohpr",
+			"api_key", "891485522447233",
+			"api_secret", "Owvf0vHIlnXPmIu5ntDdRbEzYmw"));
 
 	public static void main(String[] args) {
 		SpringApplication.run(MusicPlayerApplication.class, args);
