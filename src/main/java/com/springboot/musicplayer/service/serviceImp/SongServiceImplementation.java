@@ -119,6 +119,7 @@ public class SongServiceImplementation implements SongService {
 
         query.addCriteria(Criteria.where("name").regex(song.getName(), "i"));
         query.addCriteria(Criteria.where("author").regex(song.getAuthor(), "i"));
+        query.addCriteria(Criteria.where("genre").regex(song.getGenre(), "i"));
 
         List<Song> songs = mongoTemplate.find(query, Song.class, "song");
 
