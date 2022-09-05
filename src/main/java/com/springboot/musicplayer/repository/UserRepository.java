@@ -1,2 +1,9 @@
-package com.springboot.musicplayer.repository;public class UserRepository {
+package com.springboot.musicplayer.repository;
+
+import com.springboot.musicplayer.model.User;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends MongoRepository<User, String> {
 }
