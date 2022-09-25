@@ -54,12 +54,12 @@ public class AuthenticationController {
             ArrayList<Object> list = new ArrayList<Object>();
             list.add(jwt);
             list.add(user.getUsername());
-//            return ResponseEntity.status(HttpStatus.OK).body(
-//                    new ResponseObject("success", "Login success", token)
-//            );
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new ResponseObject("success", "Login success", list)
+                    new ResponseObject("success", "Login success", token)
             );
+//            return ResponseEntity.status(HttpStatus.OK).body(
+//                    new ResponseObject("success", "Login success", list)
+//            );
 
         } catch (AuthenticationException exception) {
             logger.error("Error: "+ exception.getMessage());

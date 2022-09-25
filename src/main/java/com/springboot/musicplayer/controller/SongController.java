@@ -129,7 +129,7 @@ public class SongController {
         );
     }
 
-    @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")
     ResponseEntity<ResponseObject> updateSong(@RequestBody Song s) {
         if (s.getId() != null) {
 
